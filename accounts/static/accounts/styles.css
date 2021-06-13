@@ -4,6 +4,19 @@
     box-sizing: border-box;
 }
 
+.danger {
+    background-color: rgb(231, 120, 90);
+    color: white;
+}
+
+.primary {
+    background-color: rgb(87, 184, 208);
+    color: white;
+}
+
+.secondary {
+    background-color: rgb(178, 195, 199);
+}
 .profile-container {
     /* border : 1px solid black; */
     width: 50%;
@@ -34,6 +47,11 @@
     padding: .2em .3em;
     margin: .8em 0 .3em;
     min-width: 100px;
+    height: 1.8em;
+    border: none;
+    /* color: white; */
+    font-size: .8rem;
+    font-weight: bold;
 }
 
 
