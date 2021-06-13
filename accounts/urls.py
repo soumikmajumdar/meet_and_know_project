@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import trial
+from .views import ProfileListView, friends
+
 
 urlpatterns = [
-    path('', trial)
+    path('', ProfileListView.as_view(), name='profiles'),
+    path('f/', friends)
 ]

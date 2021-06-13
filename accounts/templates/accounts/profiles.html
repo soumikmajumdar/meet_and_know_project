@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p> this works because</p>
+{{ to_friend }}
+
+<div class="profile-container">
+    {% for profile in profiles %}
+    <div class="profile-card">
+        <div class="image">
+            <img src="{{ profile.avatar.url }}" alt="">
+        </div>
+        <div class="profile-info">
+            <div class="name">
+                <p><a href="">{{ profile.user.username }}</a></p>
+            </div>
+            <div class="btn">
+                <button>
+                    {% if profile in to_friend %}
+                    send request
+                    {% else %}
+                    message
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
