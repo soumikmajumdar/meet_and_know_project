@@ -28,3 +28,13 @@ class Profile(models.Model):
 
         self.slug = to_slug
         super().save(*args, **kwargs)
+
+
+STATUS_CHOICES = [
+    ('sent', 'sent'),
+    ('accepted', 'accepted')
+]
+class Relationship(models.Model):
+    sender      = models.ForeignKey(Profile, related_name="sender", on_delete=models.CASCADE)
+    receiver    = models.ForeignKey(Profile, related_name="receiver", on_delete=models.CASCADE)
+    status      = models.CharField(max_length=8,choices=STATUS_CHOICES)
