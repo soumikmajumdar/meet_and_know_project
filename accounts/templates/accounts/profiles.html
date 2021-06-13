@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{ to_friend }}
-
 <div class="profile-container">
     {% for profile in profiles %}
     <div class="profile-card">
@@ -17,8 +15,12 @@
                 <button>
                     {% if profile in to_friend %}
                     send request
-                    {% else %}
+                    {% elif user in profile.friends.all %}
                     message
+                    {% elif profile.user in rel_receiver %}
+                    waiting for approval
+                    {% elif profile.user in rel_sender %}
+                    accept request
                     {% endif %}
                 </button>
             </div>
