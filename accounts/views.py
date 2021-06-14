@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Profile, Relationship
 from django.views.generic import ListView
+from django.db.models import Q
 
 class ProfileListView(ListView):
     model = Profile
@@ -28,6 +29,16 @@ def add_friend(request):
         sender = Profile.objects.get(user=request.user)
         receiver = Profile.objects.get(pk=request.POST.get('profile_pk'))
         relationship = Relationship.objects.create(sender=sender, receiver=receiver, status='sent')
+
+        return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('profiles')
+
+def remove_friend(request):
+    if request.method == "POST":
+        sender = Profile.objects.get(user=request.user)
+        receiver = Profile.objects.get(pk=request.POST.get('profile_pk'))
+        relationship = Relationship.objects.get((Q(sender=sender) & Q(receiver=receiver)) | (Q(receiver=sender) & Q(sender=receiver)))
+        relationship.delete()
 
         return redirect(request.META.get('HTTP_REFERER'))
     return redirect('profiles')
