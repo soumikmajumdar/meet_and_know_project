@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{ rel_receiver }}
-{{ request.user }}
 <div class="profile-container">
     {% for profile in profiles %}
     <div class="profile-card">
@@ -15,9 +13,9 @@
             </div>
             <div class="btn">
                 {% if profile.user not in rel_receiver and profile.user not in rel_sender %}
-                <form action="" method="POST">
+                <form action="{% url 'add_friend' %}" method="POST">
                     {% csrf_token %}
-                    <input type="hidden" name="profile.pk" value="{{ profile.pk }}">
+                    <input type="hidden" name="profile_pk" value="{{ profile.pk }}">
                     <button class="primary">add</button>
                 </form>
                 {% endif %}
@@ -27,7 +25,7 @@
                 {% if request.user in profile.friends.all %}
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <input type="hidden" name="profile.pk" value="{{ profile.pk }}">
+                    <input type="hidden" name="profile_pk" value="{{ profile.pk }}">
                     <button class="danger">remove</button>
                 </form>
                 {% endif %}
