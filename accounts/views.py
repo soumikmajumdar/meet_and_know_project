@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile, Relationship
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.db.models import Q
 
 class ProfileListView(ListView):
@@ -71,3 +71,14 @@ def remove_request(request):
         rel = Relationship.objects.get(sender=sender, receiver=receiver)
         rel.delete()
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+class ProfileDetailView(DetailView):
+    model = Profile
+    template_name = 'accounts/profile_detail.html'
+    context_object_name = 'profile'
+
+    def get_object(self, slug=None):
+        slug = self.kwargs.get('slug')
+        profile = Profile.objects.get(slug=slug)
+        return profile

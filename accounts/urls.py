@@ -6,6 +6,7 @@ from .views import (
     requests_received,
     accept_request,
     remove_request,
+    ProfileDetailView
 )
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path('requests/', requests_received, name='requests'),
     path('accept_request/', accept_request, name="accept_request"),
     path('remove_request/', remove_request, name="remove_request"),
+    path('<slug>/', ProfileDetailView.as_view(), name="profile_detail"),
 ]
