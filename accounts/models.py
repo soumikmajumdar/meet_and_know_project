@@ -33,25 +33,40 @@ class Profile(models.Model):
 
     objects = ProfileManager()
 
+    __initial_first_name = None
+    __initial_last_name = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__initial_first_name = self.first_name
+        self.__initial_last_name = self.last_name
+
     def __str__(self):
-        return f"{self.user.username}' profile"
+        return f"{self.user.username}"
 
     def num_of_friends(self):
         return self.friends.all().count()
 
     def save(self, *args, **kwargs):
-        exists = False;
-        if self.first_name and self.last_name:
-            to_slug=slugify(str(self.first_name) + " " + str(self.last_name))
-            exists = Profile.objects.filter(slug=to_slug).exists()
-            while exists:
-                to_slug += str(random_uuid())
-        else:
-            to_slug = self.user.username
+        exists = False
+        to_slug = self.slug
+
+        if self.__initial_first_name != self.first_name or self.__initial_last_name != self.last_name or self.slug == "":
+            if self.first_name and self.last_name:
+                to_slug=slugify(str(self.first_name) + " " + str(self.last_name))
+                exists = Profile.objects.filter(slug=to_slug).exists()
+                while exists:
+                    to_slug += str(random_uuid())
+            else:
+                to_slug = self.user.username
 
         self.slug = to_slug
         super().save(*args, **kwargs)
 
+class RelationshipManager(models.Manager):
+    def requests_received(self, receiver):
+        qs = Relationship.objects.filter(receiver=receiver, status="sent")
+        return qs
 
 STATUS_CHOICES = [
     ('sent', 'sent'),
@@ -61,6 +76,8 @@ class Relationship(models.Model):
     sender      = models.ForeignKey(Profile, related_name="sender", on_delete=models.CASCADE)
     receiver    = models.ForeignKey(Profile, related_name="receiver", on_delete=models.CASCADE)
     status      = models.CharField(max_length=8,choices=STATUS_CHOICES)
+
+    objects = RelationshipManager()
 
     def __str__(self):
         return f"{self.status} - {self.sender} - {self.receiver}"

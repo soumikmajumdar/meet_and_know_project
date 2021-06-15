@@ -18,15 +18,15 @@
     background-color: rgb(178, 195, 199);
 }
 .profile-container {
-    /* border : 1px solid black; */
+    margin: 0 auto;
     width: 50%;
-    margin: 1em auto;
-    padding: 1em;
+    padding: 2em;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
-.profile-card {
+
+.profile-card, .request-card {
     padding: .5em 1em;
     margin: 1em;
     text-align: center;
@@ -37,25 +37,34 @@
 .image {
     height: 60%;
 }
-.profile-card img {
+
+.profile-card img, .request-card img {
     border-radius: 100%;
     width: 80px;
     border: 1px solid black;
 }
 
-.btn button {
+.profile-info {
+    text-align: center;
+}
+.name {
+    margin: .5em 0;
+}
+
+.profile-info .btn button {
     padding: .2em .3em;
     margin: .8em 0 .3em;
     min-width: 100px;
     height: 1.8em;
     border: none;
-    /* color: white; */
     font-size: .8rem;
     font-weight: bold;
+    display: block;
+    cursor: pointer;
 }
 
 
-@media (max-width:731px) {
+@media (max-width:786px) {
     .profile-card {
         min-width: 250px;
         width: 100%;
@@ -78,4 +87,49 @@
         height: auto;
     }
 
+}
+
+
+
+/* ...........requests page.................................... */
+
+.request-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.request-card {
+    width: 30%;
+    min-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.avatar {
+    flex:1;
+}
+.request-info {
+    text-align: center;
+    flex: 2;
+}
+
+.request-info .btn {
+    display:flex;
+    justify-content: space-around;
+    margin: 2em .3em 1em 0;
+
+}
+
+.request-info .btn button {
+    min-width: 80px;
+    padding: .2em .3em;
+    height: 1.8em;
+    border: none;
+    font-size: .8rem;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
 }

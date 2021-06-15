@@ -42,3 +42,32 @@ def remove_friend(request):
 
         return redirect(request.META.get('HTTP_REFERER'))
     return redirect('profiles')
+
+def requests_received(request):
+    me = Profile.objects.get(user=request.user)
+    rels = Relationship.objects.requests_received(me)
+    senders = list(map(lambda x: x.sender, rels))
+    is_empty = False
+    if len(senders) == 0:
+        is_empty = True;
+    context = {'senders': senders, 'is_empty': is_empty }
+    return render(request, 'accounts/requests_received.html', context)
+
+def accept_request(request):
+    if request.method == 'POST':
+        sender = Profile.objects.get(pk=request.POST.get('sender_pk'))
+        receiver = Profile.objects.get(user=request.user)
+        rel = Relationship.objects.get(sender=sender, receiver=receiver)
+        if rel.status == 'sent':
+            rel.status = 'accepted'
+            rel.save()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+def remove_request(request):
+    if request.method == 'POST':
+        sender = Profile.objects.get(pk=request.POST.get('sender_pk'))
+        receiver = Profile.objects.get(user=request.user)
+        rel = Relationship.objects.get(sender=sender, receiver=receiver)
+        rel.delete()
+    return redirect(request.META.get('HTTP_REFERER'))

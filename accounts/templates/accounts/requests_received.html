@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %} Requests Received{% endblock %}
+
+{% block content %}
+<div class="request-container">
+    {% if is_empty %}
+    <h3>No friendship requests to show...</h3>
+    {% endif %}
+    {% for sender in senders %}
+    <div class="request-card">
+        <!-- the image -->
+        <div class="avatar">
+            <a href=""><img src="{{ sender.avatar.url }}" alt=""></a>
+        </div>
+        <!-- the name and buttons -->
+        <div class="request-info">
+            <div class="name">
+                <p><a href="">{{ sender.user.username }}</a></p>
+            </div>
+            <!-- the buttons -->
+            <div class="btn">
+                <div class="accept-btn">
+                    <form action="{% url 'accept_request' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="sender_pk" value="{{ sender.pk }}">
+                        <button class="primary">accept</button>
+                    </form>
+                </div>
+                <div class="reject-btn">
+                    <form action="{% url 'remove_request' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="sender_pk" value="{{ sender.pk }}">
+                        <button class="danger">reject</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
