@@ -19,6 +19,9 @@ class Post(models.Model):
     def num_likes(self):
         return self.likes.all().count()
 
+    def get_all_comments(self):
+        return self.comment_set.all()
+
 
 class Comment(models.Model):
     content     = models.TextField()

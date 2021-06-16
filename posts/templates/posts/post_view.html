@@ -1,32 +1,81 @@
 {% extends 'base.html' %}
 {% block title %} Home{% endblock %}
 {% block content %}
-    <div class="post-container">
-        <div class="post-new">
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ p_form.as_p }}
-                <button class="submit-btn" type="button" name="submit_p_form">Post</button>
-            </form>
-        </div>
-        {% for post in posts %}
-        <div class="post-list-box">
-            <!-- author details  -->
-            <div class="author">
-                <div class="author-avatar">
-                    <a href=""><img src="{{ post.author.avatar.url }}" alt=""</a>
+    <div class="post-page-container">
+        <div class="post-container left-hand-container">
+            <div class="post-new">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ p_form.as_p }}
+                    <button class="submit-btn" type="submit" name="submit_p_form">Post</button>
+                </form>
+            </div>
+            {% for post in posts %}
+            <div class="post-list-box">
+                <!-- author details  -->
+                <div class="author">
+                    <div class="author-avatar">
+                        <a href=""><img src="{{ post.author.avatar.url }}" alt=""</a>
+                    </div>
+                    <div class="author-info">
+                        <a href=""><h4>{{ post.author.user.username }}</h4></a>
+                        <small>{{ post.updated|timesince }} ago</small>
+                    </div>
                 </div>
-                <div class="author-info">
-                    <a href=""><h4>{{ post.author.user.username }}</h4></a>
-                    <small>{{ post.updated|timesince }} aog</small>
+                <!-- <hr> -->
+                <!-- the post  -->
+                <div class="post-body">
+                    <p>{{ post.content }}</p>
+                </div>
+                <div class="like-comment">
+                    <!-- like button -->
+                    <div class="like">
+                        <a href=""><i class="fas fa-thumbs-up"></i></a>
+                    </div>
+                    {% for comment in post.comment_set.all %}
+                    <div class="comment-list-box">
+
+
+
+                        <div class="author">
+                            <div class="author-avatar">
+                                <a href=""><img src="{{ comment.author.avatar.url }}" alt=""</a>
+                            </div>
+                            <div class="author-info">
+                                <a href=""><h4>{{ comment.author.user.username }}</h4></a>
+                                <small>{{ comment.updated|timesince }} ago</small>
+                            </div>
+                        </div>
+                        <!-- <hr> -->
+                        <!-- the comment  -->
+                        <div class="comment-body">
+                            <p>{{ comment.content }}</p>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    {% endfor %}
+                    <div class="comment-new"></div>
                 </div>
             </div>
-            <!-- <hr> -->
-            <!-- the post  -->
-            <div class="post-body">
-                <p>{{ post }}</p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <div class="right-hand-container">
+        </div>
     </div>
 {% endblock %}

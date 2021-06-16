@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'posts/all.css' %}">
     <link rel="stylesheet" href="{% static 'accounts/styles.css' %}">
     <link rel="stylesheet" href="{% static 'posts/styles.css' %}">
     <title>{% block title %}{% endblock %}</title>
@@ -12,5 +13,7 @@
 <body>
     {% block content %}{% endblock %}
 
+
+<script type="text/javascript" src="{% static 'posts/all.js' %}"></script>
 </body>
 </html>
