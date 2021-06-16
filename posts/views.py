@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import PostForm, CommentForm
 from accounts.models import Profile
-from .models import Post
+from .models import Post, Like, Comment
 
 def post_view(request):
     author = Profile.objects.get(user=request.user)
@@ -20,9 +20,34 @@ def post_view(request):
 
 
     context = {
+        'author'    : author,
         'posts'     : posts,
         'p_form'    : p_form,
         'c_form'    : c_form
     }
 
     return render(request, 'posts/post_view.html', context)
+
+
+def like_unlike_post(request):
+    if request.method == 'POST':
+        post = Post.objects.get(pk=request.POST.get('post_pk'))
+        user = Profile.objects.get(user=request.user)
+        if user in post.likes.all():
+            post.likes.remove(user)
+        else:
+            post.likes.add(user)
+
+        like, created = Like.objects.get_or_create(user=user, post=post)
+
+        if  not created:
+            if like.status == "like":
+                like.status = "unlike"
+            else:
+                like.status = "like"
+        else:
+            like.status = "like"
+        post.save()
+        like.save()
+
+    return redirect('posts')

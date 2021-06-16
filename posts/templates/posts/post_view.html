@@ -30,7 +30,16 @@
                 <div class="like-comment">
                     <!-- like button -->
                     <div class="like">
-                        <a href=""><i class="fas fa-thumbs-up"></i></a>
+                        <form action="{% url 'like_unlike_post' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_pk" value={{ post.pk }}>
+                            {% if author not in post.likes.all %}
+                            <button><i class="fas fa-thumbs-up"></i></button>
+                            {% else %}
+                            <button type="submit"><i class="fas fa-thumbs-down"></i></button>
+                            {% endif %}
+
+                        </form>
                     </div>
                     {% for comment in post.comment_set.all %}
                     <div class="comment-list-box">
