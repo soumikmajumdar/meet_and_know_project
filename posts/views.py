@@ -15,7 +15,19 @@ def post_view(request):
             instance = p_form.save(commit=False)
             instance.author = author
             instance.save()
+
             p_form= PostForm()
+
+
+    if 'submit_c_form' in request.POST:
+        c_form  = CommentForm(request.POST)
+        post = Post.objects.get(pk=request.POST.get('post_pk'))
+        if c_form .is_valid():
+            instance = c_form.save(commit=False)
+            instance.author = author
+            instance.post = post
+            instance.save()
+            c_form = CommentForm()
 
 
 

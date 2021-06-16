@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
         fields = ['content', 'image']
 
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(label="", widget=forms.Textarea(attrs={'placeholder': 'type here', 'class':'post-text-box'}))
+    content = forms.CharField(label="", widget=forms.Textarea(attrs={'placeholder': 'do you want to comment?', 'class':'comment-text-box'}))
     class Meta:
-        model = Post
+        model = Comment
         fields = ['content']

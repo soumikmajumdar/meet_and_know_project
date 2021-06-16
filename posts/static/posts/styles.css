@@ -33,7 +33,7 @@
     margin: 1em 0 2em;
 }
 
-.submit-btn {
+.post-submit-btn, .comment-submit-btn {
     padding: .3em .5em;
     margin-top: 2em;
     min-width: 15%;
@@ -83,8 +83,10 @@
     margin: 1.5em 0 1em;
 }
 
-.like a {
+.like button {
     color: #257699;
+    border: none;
+    cursor: pointer;
 }
 
 .comment-list-box {
@@ -97,6 +99,22 @@
 
 .comment-body {
     padding: .5em;
+}
+
+.comment-new {
+    text-align: right;
+}
+.comment-text-box {
+    height: 6em;
+    width: 100%;
+    border: none;
+    box-shadow: 0 0 5px rgba(40, 42, 41, 0.4);
+    padding: 1em;
+    margin: 1em;
+    font-size: .8rem;
+}
+.comment-submit-btn {
+    margin-top: 1em;
 }
 
 @media(max-width: 1000px) {
