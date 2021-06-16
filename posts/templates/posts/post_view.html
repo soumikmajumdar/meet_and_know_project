@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock %}
+{% block content %}
+    <div class="post-container">
+        <div class="post-new">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ p_form.as_p }}
+                <button class="submit-btn" type="button" name="submit_p_form">Post</button>
+            </form>
+        </div>
+        {% for post in posts %}
+        <div class="post-list-box">
+            <!-- author details  -->
+            <div class="author">
+                <div class="author-avatar">
+                    <a href=""><img src="{{ post.author.avatar.url }}" alt=""</a>
+                </div>
+                <div class="author-info">
+                    <a href=""><h4>{{ post.author.user.username }}</h4></a>
+                    <small>{{ post.updated|timesince }} aog</small>
+                </div>
+            </div>
+            <!-- <hr> -->
+            <!-- the post  -->
+            <div class="post-body">
+                <p>{{ post }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
