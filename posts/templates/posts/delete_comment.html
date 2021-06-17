@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="delete-container">
+    <div class="delete-box">
+        <h5>Are you sure you want to delete the comment?</h5>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button types="submit">Yes</button>
+            <a href="{% url 'posts' %}">No</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

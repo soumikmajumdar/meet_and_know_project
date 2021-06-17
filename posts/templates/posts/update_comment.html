@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="update-box">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button types="submit" class="update-btn">Update</button>
+        <a href="{% url 'posts' %}">return</a>
+    </form>
+</div>
+{% endblock %}

@@ -83,7 +83,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name= "posts/update_post.html"
     success_url = reverse_lazy("posts")
-    form_class = CommentForm
+    form_class = PostForm
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -91,5 +91,32 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         post = self.get_object()
         if post.author.user == self.request.user:
+            return True
+        return False
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name= "posts/delete_comment.html"
+    success_url = reverse_lazy("posts")
+
+    def test_func(self):
+        comment = self.get_object()
+        if comment.author.user == self.request.user:
+            return True
+        return False
+
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    template_name= "posts/update_comment.html"
+    success_url = reverse_lazy("posts")
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def test_func(self):
+        comment = self.get_object()
+        if comment.author.user == self.request.user:
             return True
         return False

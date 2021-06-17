@@ -23,8 +23,8 @@
                     </div>
                     {% if request.user == post.author.user %}
                     <div class="delete-update">
-                                <a href="{% url 'delete' post.pk %}"><i class="far fa-trash-alt fa-sm"></i></a>
-                                <a href="{% url 'update' post.pk %}"><i class="fas fa-highlighter"></i></a>
+                                <a href="{% url 'delete_post' post.pk %}"><i class="far fa-trash-alt fa-sm"></i></a>
+                                <a href="{% url 'update_post' post.pk %}"><i class="fas fa-highlighter"></i></a>
                     </div>
                     {% endif %}
                 </div>
@@ -61,8 +61,8 @@
                             </div>
                             {% if request.user == comment.author.user %}
                             <div class="delete-update">
-                                <a href=""><i class="far fa-trash-alt fa-sm"></i></a>
-                                <a href=""><i class="fas fa-highlighter"></i></a>
+                                <a href="{% url "delete_comment" comment.pk %}"><i class="far fa-trash-alt fa-sm"></i></a>
+                                <a href="{% url "update_comment" comment.pk %}"><i class="fas fa-highlighter"></i></a>
                             </div>
                             {% endif %}
                         </div>
