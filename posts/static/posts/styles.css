@@ -95,6 +95,11 @@
 
 .like {
     margin: 1.5em 0 1em;
+    display: flex;
+    width: 8%;
+    justify-content: space-between;
+    color: #257699;
+
 }
 
 .like button {
@@ -138,6 +143,37 @@
     margin-top: 1em;
 }
 
+.delete-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-box {
+    box-shadow: 0 0 5px rgba(117, 120, 111, 0.6);
+    width: 40%;
+    min-height: 30vh;
+    padding: 3em;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.delete-box form {
+    margin: 2em 0;
+}
+
+.delete-box button, .delete-box a {
+    width: 80px;
+    font-size: 1.1rem;
+    border: none;
+    padding: .3em 1em;
+}
+.delete-box button {
+    background: rgb(228, 98, 94);
+    color: white;
+}
 @media(max-width: 1000px) {
     .post-container {
         width: 100%;

@@ -23,8 +23,8 @@
                     </div>
                     {% if request.user == post.author.user %}
                     <div class="delete-update">
-                                <a href=""><i class="far fa-trash-alt fa-sm"></i></a>
-                                <a href=""><i class="fas fa-highlighter"></i></a>
+                                <a href="{% url 'delete' post.pk %}"><i class="far fa-trash-alt fa-sm"></i></a>
+                                <a href="{% url 'update' post.pk %}"><i class="fas fa-highlighter"></i></a>
                     </div>
                     {% endif %}
                 </div>
@@ -44,8 +44,10 @@
                             {% else %}
                             <button type="submit"><i class="fas fa-thumbs-down"></i></button>
                             {% endif %}
-
                         </form>
+                        <div class="like-count">
+                            <p>{{ post.num_likes }}</p>
+                        </div>
                     </div>
                     {% for comment in post.comment_set.all %}
                     <div class="comment-list-box">

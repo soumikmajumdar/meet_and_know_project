@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.urls import  reverse_lazy
 from .forms import PostForm, CommentForm
 from accounts.models import Profile
 from .models import Post, Like, Comment
+from django.views.generic import DeleteView, UpdateView
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 def post_view(request):
     author = Profile.objects.get(user=request.user)
@@ -63,3 +66,30 @@ def like_unlike_post(request):
         like.save()
 
     return redirect('posts')
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    template_name= "posts/delete_post.html"
+    success_url = reverse_lazy("posts")
+
+    def test_func(self):
+        post = self.get_object()
+        if post.author.user == self.request.user:
+            return True
+        return False
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    template_name= "posts/update_post.html"
+    success_url = reverse_lazy("posts")
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if post.author.user == self.request.user:
+            return True
+        return False
