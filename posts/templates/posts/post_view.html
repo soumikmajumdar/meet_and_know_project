@@ -21,6 +21,12 @@
                         <a href=""><h4>{{ post.author.user.username }}</h4></a>
                         <small>{{ post.updated|timesince }} ago</small>
                     </div>
+                    {% if request.user == post.author.user %}
+                    <div class="delete-update">
+                                <a href=""><i class="far fa-trash-alt fa-sm"></i></a>
+                                <a href=""><i class="fas fa-highlighter"></i></a>
+                    </div>
+                    {% endif %}
                 </div>
                 <!-- <hr> -->
                 <!-- the post  -->
@@ -51,6 +57,12 @@
                                 <a href=""><h4>{{ comment.author.user.username }}</h4></a>
                                 <small>{{ comment.updated|timesince }} ago</small>
                             </div>
+                            {% if request.user == comment.author.user %}
+                            <div class="delete-update">
+                                <a href=""><i class="far fa-trash-alt fa-sm"></i></a>
+                                <a href=""><i class="fas fa-highlighter"></i></a>
+                            </div>
+                            {% endif %}
                         </div>
                         <!-- <hr> -->
                         <!-- the comment  -->

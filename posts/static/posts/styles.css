@@ -41,6 +41,7 @@
     color: white;
     border: none;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .post-list-box {
@@ -61,6 +62,8 @@
 
 .author .author-avatar {
     margin-right: 2em;
+    width: 10%;
+    text-align: center;
 }
 
 .author .author-avatar img {
@@ -72,6 +75,17 @@
     display: block;
     color: #696e6f;
     margin: .2em 0;
+}
+
+.author-info {
+    width: 75%;
+}
+
+.post-list-box .delete-update {
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+    font-size: .9rem;
 }
 
 
@@ -94,11 +108,18 @@
     margin-left: auto;
 }
 .comment-list-box .author {
-    padding: .5em;
+    padding: 2%;
+}
+
+.comment-list-box .author .author-avatar {
+    width: 10%;
+    text-align: center;
 }
 
 .comment-body {
     padding: .5em;
+    width: 82.5%;
+    margin-left: auto;
 }
 
 .comment-new {
