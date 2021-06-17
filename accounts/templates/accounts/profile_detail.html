@@ -2,8 +2,27 @@
 {% block title %} {{ profile.user.username }} {% endblock %}
 
 {% block content %}
-working
 <div class="detail-container">
-    {{ profile }}
+    <div class="detail-box">
+        <div class="avatar">
+            <a href="{{ profile.avatar.url }}"><img src="{{ profile.avatar.url }}" alt=""></a>
+        </div>
+        <div class="details">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ profile.user.username }}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Bio</td>
+                    <td>N/A</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}

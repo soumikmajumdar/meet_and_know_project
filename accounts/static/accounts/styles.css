@@ -133,3 +133,49 @@
     display: block;
     cursor: pointer;
 }
+
+
+/* ......................detail page............................ */
+
+
+
+.detail-box {
+    display: flex;
+    width: 60%;
+    margin: 4em auto;
+    padding: 3em;
+    box-shadow: 0 0 10px rgba(86, 92, 86, 0.52);
+
+}
+
+.detail-box .avatar {
+    width: 30%;
+    text-align: center;
+    padding: 2em;
+    box-shadow: 0 0 5px rgba(86, 92, 86, 0.52);
+
+}
+
+.detail-box .avatar img {
+    width: 10em;
+    border-radius: 100%;
+}
+
+.detail-box .details {
+    width: 70%;
+    padding: 2em;
+    margin: 0 1em;
+    box-shadow: 0 0 5px rgba(86, 92, 86, 0.52);
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 400px;
+    margin: 0 auto;
+    border-radius: .5em .5em 0 0;
+    overflow: hidden;
+}
+
+table td {
+    padding: 1em;
+}
